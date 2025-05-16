@@ -1,3 +1,12 @@
 INSERT INTO clientes (nombre, telefono, direccion, correo) VALUES
 ('Juan Pérez', '777123456', 'Calle 1, Ciudad', 'juanadeelverga@gmail.com'),
 ('Ana Torres', '777987654', 'Av. Principal 45', 'anacleta@mail.com');
+
+INSERT INTO categorias (nombre) VALUES
+('Celulares'), ('Accesorios'), ('Audio'), ('Computación');
+
+INSERT INTO productos (nombre, descripcion, categoria_id, precio, stock) VALUES
+('Samsung Galaxy A32', 'Smartphone de gama media', 1, 250.00, 20),
+('Audífonos Bluetooth', 'Audífonos inalámbricos deportivos', 2, 35.00, 50),
+('Parlante JBL', 'Parlante portátil con bluetooth', 3, 80.00, 15),
+('Mouse inalámbrico', 'Mouse óptico con receptor USB', 2, 12.00, 30);
