@@ -41,3 +41,38 @@ CREATE TABLE roles (
     nombre VARCHAR(50)
 );
 
+CREATE TABLE ventas (
+    id_venta SERIAL PRIMARY KEY,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_cliente INT REFERENCES clientes(id_cliente),
+    id_usuario INT REFERENCES usuarios(id_usuario),
+    total NUMERIC(10,2)
+);
+
+CREATE TABLE detalle_venta (
+    id_detalle SERIAL PRIMARY KEY,
+    id_venta INT REFERENCES ventas(id_venta),
+    id_producto INT REFERENCES productos(id_producto),
+    cantidad INT,
+    subtotal NUMERIC(10,2)
+);
+
+CREATE TABLE metodos_pago (
+    id_metodo SERIAL PRIMARY KEY,
+    nombre VARCHAR(50)
+);
+
+CREATE TABLE pagos (
+    id_pago SERIAL PRIMARY KEY,
+    id_venta INT REFERENCES ventas(id_venta),
+    id_metodo INT REFERENCES metodos_pago(id_metodo),
+    monto NUMERIC(10,2)
+);
+
+CREATE TABLE facturas (
+    id_factura SERIAL PRIMARY KEY,
+    id_venta INT REFERENCES ventas(id_venta),
+    numero_factura VARCHAR(20),
+    fecha_emision DATE
+);
+
