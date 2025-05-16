@@ -14,3 +14,12 @@ INSERT INTO productos (nombre, descripcion, categoria_id, precio, stock) VALUES
 INSERT INTO usuarios (nombre, correo, rol, contrasena) VALUES
 ('Admin', 'admin@empresa.com', 'Administrador', 'admin123'),
 ('Vendedor1', 'ventas@tienda.com', 'Vendedor', 'venta456');
+
+-- Venta realizada por Juan Pérez
+INSERT INTO ventas (id_cliente, id_usuario, total) VALUES (1, 2, 295.00);
+
+-- Detalles de la venta: 1 celular + 1 audífono
+INSERT INTO detalle_venta (id_venta, id_producto, cantidad, subtotal) VALUES
+(1, 1, 1, 250.00),
+(1, 2, 1, 35.00),
+(1, 4, 1, 10.00);  -- Supón que le diste un mouse con descuento
