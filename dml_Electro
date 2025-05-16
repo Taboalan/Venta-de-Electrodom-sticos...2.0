@@ -33,3 +33,35 @@ INSERT INTO metodos_pago (nombre) VALUES ('Efectivo'), ('Tarjeta'), ('Transferen
 INSERT INTO pagos (id_venta, id_metodo, monto) VALUES
 (1, 1, 295.00);
 
+INSERT INTO roles (nombre) VALUES
+('Administrador'),
+('Vendedor'),
+('Técnico');
+INSERT INTO compras (id_proveedor, total) VALUES (1, 580.00);
+
+INSERT INTO detalle_compra (id_compra, id_producto, cantidad, costo_unitario) VALUES
+(1, 55, 5, 200.00),
+(1, 2, 10, 25.00),
+(1, 4, 10, 8.00);
+INSERT INTO inventario_movimientos (id_producto, tipo_movimiento, cantidad, descripcion) VALUES
+(1, 'entrada', 5, 'Compra a Tech Import'),
+(2, 'entrada', 10, 'Compra a Tech Import'),
+(4, 'entrada', 10, 'Compra a Tech Import'),
+(1, 'salida', 1, 'Venta a Juan Pérez');
+
+INSERT INTO ubicaciones (nombre, descripcion) VALUES
+('Almacén Principal', 'Zona de almacenamiento de productos principales'),
+('Mostrador', 'Productos disponibles para la venta directa');
+
+INSERT INTO garantias (id_producto, duracion_meses, condiciones) VALUES
+(1, 12, 'Defectos de fábrica'),
+(2, 6, 'Daños no causados por mal uso');
+
+INSERT INTO soporte_tecnico (id_cliente, descripcion, fecha_apertura, estado) VALUES
+(1, 'Celular no carga', CURRENT_DATE, 'Abierto'),
+(2, 'Audífonos no conectan por bluetooth', CURRENT_DATE, 'Cerrado');
+
+INSERT INTO reportes (titulo, fecha_creacion, contenido) VALUES
+('Ventas Mensuales Abril', CURRENT_DATE, 'Resumen de ventas realizadas en abril.'),
+('Productos Más Vendidos', CURRENT_DATE, 'Lista de los 10 productos más vendidos.');
+
