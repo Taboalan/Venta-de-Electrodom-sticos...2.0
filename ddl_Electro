@@ -76,3 +76,33 @@ CREATE TABLE facturas (
     fecha_emision DATE
 );
 
+CREATE TABLE compras (
+    id_compra SERIAL PRIMARY KEY,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_proveedor INT REFERENCES proveedores(id_proveedor),
+    total NUMERIC(10,2)
+);
+
+CREATE TABLE detalle_compra (
+    id_detalle SERIAL PRIMARY KEY,
+    id_compra INT REFERENCES compras(id_compra),
+    id_producto INT REFERENCES productos(id_producto),
+    cantidad INT,
+    costo_unitario NUMERIC(10,2)
+);
+
+CREATE TABLE inventario_movimientos (
+    id_movimiento SERIAL PRIMARY KEY,
+    id_producto INT REFERENCES productos(id_producto),
+    tipo_movimiento VARCHAR(20), -- 'entrada', 'salida'
+    cantidad INT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    descripcion TEXT
+);
+
+CREATE TABLE ubicaciones (
+    id_ubicacion SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    descripcion TEXT
+);
+
