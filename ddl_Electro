@@ -105,4 +105,27 @@ CREATE TABLE ubicaciones (
     nombre VARCHAR(100),
     descripcion TEXT
 );
+CREATE TABLE garantias (
+    id_garantia SERIAL PRIMARY KEY,
+    id_producto INT REFERENCES productos(id_producto),
+    duracion_meses INT,
+    condiciones TEXT
+);
+
+CREATE TABLE devoluciones (
+    id_devolucion SERIAL PRIMARY KEY,
+    id_venta INT REFERENCES ventas(id_venta),
+    id_producto INT REFERENCES productos(id_producto),
+    motivo TEXT,
+    fecha DATE
+);
+
+CREATE TABLE soporte_tecnico (
+    id_ticket SERIAL PRIMARY KEY,
+    id_cliente INT REFERENCES clientes(id_cliente),
+    descripcion TEXT,
+    fecha_apertura DATE,
+    estado VARCHAR(20)
+);
+
 
