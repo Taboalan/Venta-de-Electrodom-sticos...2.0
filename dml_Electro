@@ -27,3 +27,9 @@ INSERT INTO detalle_venta (id_venta, id_producto, cantidad, subtotal) VALUES
 INSERT INTO proveedores (nombre, contacto, telefono, direccion) VALUES
 ('Tech Import S.A.', 'Carlos Mendez', '555112233', 'Zona Industrial 3'),
 ('ElectroDistribuidor', 'Laura Romero', '555223344', 'Av. Comercio 101');
+
+INSERT INTO metodos_pago (nombre) VALUES ('Efectivo'), ('Tarjeta'), ('Transferencia');
+
+INSERT INTO pagos (id_venta, id_metodo, monto) VALUES
+(1, 1, 295.00);
+
