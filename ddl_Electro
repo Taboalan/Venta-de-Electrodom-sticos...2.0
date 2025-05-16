@@ -1,1 +1,43 @@
+CREATE TABLE clientes (
+    id_cliente SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    telefono VARCHAR(15),
+    direccion TEXT,
+    correo VARCHAR(100)
+);
+
+CREATE TABLE productos (
+    id_producto SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    descripcion TEXT,
+    categoria_id INT,
+    precio NUMERIC(10,2) NOT NULL,
+    stock INT NOT NULL DEFAULT 0
+);
+
+CREATE TABLE categorias (
+    id_categoria SERIAL PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE proveedores (
+    id_proveedor SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    contacto VARCHAR(100),
+    telefono VARCHAR(15),
+    direccion TEXT
+);
+
+CREATE TABLE usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nombre VARCHAR(100),
+    correo VARCHAR(100),
+    rol VARCHAR(50),
+    contrasena TEXT
+);
+
+CREATE TABLE roles (
+    id_rol SERIAL PRIMARY KEY,
+    nombre VARCHAR(50)
+);
 
