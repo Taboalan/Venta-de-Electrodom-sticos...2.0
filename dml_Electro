@@ -10,3 +10,7 @@ INSERT INTO productos (nombre, descripcion, categoria_id, precio, stock) VALUES
 ('Audífonos Bluetooth', 'Audífonos inalámbricos deportivos', 2, 35.00, 50),
 ('Parlante JBL', 'Parlante portátil con bluetooth', 3, 80.00, 15),
 ('Mouse inalámbrico', 'Mouse óptico con receptor USB', 2, 12.00, 30);
+
+INSERT INTO usuarios (nombre, correo, rol, contrasena) VALUES
+('Admin', 'admin@empresa.com', 'Administrador', 'admin123'),
+('Vendedor1', 'ventas@tienda.com', 'Vendedor', 'venta456');
