@@ -226,4 +226,293 @@
 | clave       | VARCHAR(50)   | Nombre de la configuración           |
 | valor       | TEXT          | Valor asignado                       |
 
----
+## Modelo Conceptual
+```mermaid
+erDiagram
+CLIENTES {
+        
+    }
+
+    PRODUCTOS {
+        
+    }
+
+    CATEGORIAS {
+        
+    }
+
+    PROVEEDORES {
+        
+    }
+
+    USUARIOS {
+        
+    }
+
+    ROLES {
+       
+    }
+
+    VENTAS {
+        
+    }
+
+    DETALLE_VENTA {
+        
+    }
+
+    METODOS_PAGO {
+        
+    }
+
+    PAGOS {
+        
+    }
+
+    FACTURAS {
+        
+    }
+
+    COMPRAS {
+        
+    }
+
+    DETALLE_COMPRA {
+        
+    }
+
+    INVENTARIO_MOVIMIENTOS {
+        
+    }
+
+    UBICACIONES {
+        
+    }
+
+    GARANTIAS {
+        
+    }
+
+    DEVOLUCIONES {
+        
+    }
+
+    SOPORTE_TECNICO {
+       
+    }
+
+    REPORTES {
+        
+    }
+
+    AUDITORIA {
+        
+    }
+
+    CONFIGURACIONES {
+       
+    }
+
+    CLIENTES ||--o{ VENTAS : realiza
+    USUARIOS ||--o{ VENTAS : gestiona
+    VENTAS ||--|{ DETALLE_VENTA : contiene
+    PRODUCTOS ||--|{ DETALLE_VENTA : vendido_en
+    PRODUCTOS }o--|| CATEGORIAS : pertenece_a
+    PRODUCTOS ||--o{ DETALLE_COMPRA : comprado_en
+    COMPRAS ||--|{ DETALLE_COMPRA : incluye
+    PROVEEDORES ||--o{ COMPRAS : abastece
+    PRODUCTOS ||--o{ INVENTARIO_MOVIMIENTOS : afecta
+    PRODUCTOS ||--|| GARANTIAS : tiene
+    VENTAS ||--o{ DEVOLUCIONES : puede_generar
+    CLIENTES ||--o{ SOPORTE_TECNICO : solicita
+    VENTAS ||--o{ PAGOS : tiene
+    METODOS_PAGO ||--o{ PAGOS : se_usa_en
+    VENTAS ||--|| FACTURAS : genera
+    USUARIOS ||--o{ AUDITORIA : registra
+    USUARIOS }o--|| ROLES : tiene
+    INVENTARIO_MOVIMIENTOS ||--|| UBICACIONES : se_realiza_en
+    REPORTES ||--|| USUARIOS : creado_por
+    CONFIGURACIONES ||--|| USUARIOS : modificada_por
+```
+
+
+## Diagrama de Base de Datos
+```mermaid
+erDiagram
+
+    CLIENTES ||--o{ VENTAS : realiza
+    USUARIOS ||--o{ VENTAS : gestiona
+    VENTAS ||--|{ DETALLE_VENTA : contiene
+    PRODUCTOS ||--|{ DETALLE_VENTA : vendido_en
+    PRODUCTOS }o--|| CATEGORIAS : pertenece_a
+    PRODUCTOS ||--o{ DETALLE_COMPRA : comprado_en
+    COMPRAS ||--|{ DETALLE_COMPRA : incluye
+    PROVEEDORES ||--o{ COMPRAS : abastece
+    PRODUCTOS ||--o{ INVENTARIO_MOVIMIENTOS : afecta
+    PRODUCTOS ||--|| GARANTIAS : tiene
+    VENTAS ||--o{ DEVOLUCIONES : puede_generar
+    CLIENTES ||--o{ SOPORTE_TECNICO : solicita
+    VENTAS ||--o{ PAGOS : tiene
+    METODOS_PAGO ||--o{ PAGOS : se_usa_en
+    VENTAS ||--|| FACTURAS : genera
+    USUARIOS ||--o{ AUDITORIA : registra
+    USUARIOS }o--|| ROLES : tiene
+    INVENTARIO_MOVIMIENTOS ||--|| UBICACIONES : se_realiza_en
+    REPORTES ||--|| USUARIOS : creado_por
+    CONFIGURACIONES ||--|| USUARIOS : modificada_por
+
+    CLIENTES {
+        int id_cliente PK
+        varchar nombre
+        varchar telefono
+        text direccion
+        varchar correo
+    }
+
+    PRODUCTOS {
+        int id_producto PK
+        varchar nombre
+        text descripcion
+        int categoria_id FK
+        numeric precio
+        int stock
+    }
+
+    CATEGORIAS {
+        int id_categoria PK
+        varchar nombre
+    }
+
+    PROVEEDORES {
+        int id_proveedor PK
+        varchar nombre
+        varchar contacto
+        varchar telefono
+        text direccion
+    }
+
+    USUARIOS {
+        int id_usuario PK
+        varchar nombre
+        varchar correo
+        varchar contrasena
+        int rol_id FK
+    }
+
+    ROLES {
+        int id_rol PK
+        varchar nombre
+    }
+
+    VENTAS {
+        int id_venta PK
+        timestamp fecha
+        int id_cliente FK
+        int id_usuario FK
+        numeric total
+    }
+
+    DETALLE_VENTA {
+        int id_detalle PK
+        int id_venta FK
+        int id_producto FK
+        int cantidad
+        numeric subtotal
+    }
+
+    METODOS_PAGO {
+        int id_metodo PK
+        varchar nombre
+    }
+
+    PAGOS {
+        int id_pago PK
+        int id_venta FK
+        int id_metodo FK
+        numeric monto
+    }
+
+    FACTURAS {
+        int id_factura PK
+        int id_venta FK
+        varchar numero_factura
+        date fecha_emision
+    }
+
+    COMPRAS {
+        int id_compra PK
+        timestamp fecha
+        int id_proveedor FK
+        numeric total
+    }
+
+    DETALLE_COMPRA {
+        int id_detalle PK
+        int id_compra FK
+        int id_producto FK
+        int cantidad
+        numeric costo_unitario
+    }
+
+    INVENTARIO_MOVIMIENTOS {
+        int id_movimiento PK
+        int id_producto FK
+        varchar tipo_movimiento
+        int cantidad
+        timestamp fecha
+        int id_ubicacion FK
+        text descripcion
+    }
+
+    UBICACIONES {
+        int id_ubicacion PK
+        varchar nombre
+        text descripcion
+    }
+
+    GARANTIAS {
+        int id_garantia PK
+        int id_producto FK
+        int duracion_meses
+        text condiciones
+    }
+
+    DEVOLUCIONES {
+        int id_devolucion PK
+        int id_venta FK
+        int id_producto FK
+        text motivo
+        date fecha
+    }
+
+    SOPORTE_TECNICO {
+        int id_ticket PK
+        int id_cliente FK
+        text descripcion
+        date fecha_apertura
+        varchar estado
+    }
+
+    REPORTES {
+        int id_reporte PK
+        varchar titulo
+        date fecha_creacion
+        text contenido
+        int id_usuario FK
+    }
+
+    AUDITORIA {
+        int id_evento PK
+        int id_usuario FK
+        text accion
+        timestamp fecha
+    }
+
+    CONFIGURACIONES {
+        int id_config PK
+        varchar clave
+        text valor
+        int id_usuario FK
+    }
+
+```
