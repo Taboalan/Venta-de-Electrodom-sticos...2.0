@@ -19,3 +19,13 @@ SELECT
 FROM detalle_venta dv
 JOIN ventas v ON dv.id_venta = v.id_venta
 JOIN productos p ON dv.id_producto = p.id_producto;
+
+-- Resumenes de las ventas por dia
+CREATE VIEW vista_resumen_ventas_diarias AS
+SELECT 
+    DATE(fecha) AS fecha_venta,
+    COUNT(*) AS cantidad_ventas,
+    SUM(total) AS total_recaudado
+FROM ventas
+GROUP BY DATE(fecha)
+ORDER BY fecha_venta DESC;
